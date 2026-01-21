@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tweet Viral Analyzer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      width: 320px;
+      background: #15202b;
+      color: #e7e9ea;
+    }
+
+    .header {
+      padding: 20px;
+      border-bottom: 1px solid #38444d;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+
+    h1 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: #8899a6;
+      margin-top: 4px;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .setting {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #38444d;
+    }
+
+    .setting:last-child {
+      border-bottom: none;
+    }
+
+    .setting-info {
+      flex: 1;
+    }
+
+    .setting-label {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .setting-desc {
+      font-size: 12px;
+      color: #8899a6;
+      margin-top: 2px;
+    }
+
+    /* Toggle Switch */
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      margin-left: 12px;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #38444d;
+      transition: 0.3s;
+      border-radius: 24px;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #e7e9ea;
+      transition: 0.3s;
+      border-radius: 50%;
+    }
+
+    .toggle input:checked + .toggle-slider {
+      background-color: #1d9bf0;
+    }
+
+    .toggle input:checked + .toggle-slider:before {
+      transform: translateX(20px);
+    }
+
+    .stats {
+      background: #192734;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .stats-title {
+      font-size: 12px;
+      color: #8899a6;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .stat-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: #8899a6;
+    }
+
+    .stat-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1d9bf0;
+    }
+
+    .footer {
+      padding: 16px 20px;
+      border-top: 1px solid #38444d;
+      text-align: center;
+    }
+
+    .footer a {
+      color: #1d9bf0;
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      background: rgba(0, 186, 124, 0.1);
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #00ba7c;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .status-text {
+      font-size: 13px;
+      color: #00ba7c;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">📊</div>
+    <h1>Tweet Viral Analyzer</h1>
+    <p class="subtitle">Optimize your tweets before posting</p>
+  </div>
+
+  <div class="content">
+    <div class="status">
+      <div class="status-dot"></div>
+      <span class="status-text">Active on Twitter/X</span>
+    </div>
+
+    <div class="setting">
+      <div class="setting-info">
+        <div class="setting-label">Enable Analysis</div>
+        <div class="setting-desc">Show analysis before posting</div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="enableAnalysis" checked>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <div class="setting">
+      <div class="setting-info">
+        <div class="setting-label">Block Low Scores</div>
+        <div class="setting-desc">Warn on scores below 40</div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="blockLowScores">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <div class="setting">
+      <div class="setting-info">
+        <div class="setting-label">Sound Effects</div>
+        <div class="setting-desc">Play sound on analysis</div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="soundEffects">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <div class="stats">
+      <div class="stats-title">Your Stats</div>
+      <div class="stat-row">
+        <span class="stat-label">Tweets Analyzed</span>
+        <span class="stat-value" id="tweetsAnalyzed">0</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Average Score</span>
+        <span class="stat-value" id="avgScore">--</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Tweets Improved</span>
+        <span class="stat-value" id="tweetsImproved">0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="https://github.com/mirage-sudo183/twitter-viral-analysis" target="_blank">View on GitHub</a>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

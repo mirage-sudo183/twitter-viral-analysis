@@ -1,0 +1,369 @@
+/* Tweet Viral Analyzer - Modal Styles */
+
+.tva-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  animation: tva-fadeIn 0.2s ease-out;
+}
+
+@keyframes tva-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes tva-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.tva-modal {
+  background: #15202b;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: tva-slideUp 0.3s ease-out;
+}
+
+/* Header */
+.tva-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #38444d;
+}
+
+.tva-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.tva-close {
+  background: none;
+  border: none;
+  color: #8899a6;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tva-close:hover {
+  background: rgba(239, 243, 244, 0.1);
+  color: #ffffff;
+}
+
+/* Score Section */
+.tva-score-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+}
+
+.tva-score-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid;
+}
+
+.tva-score-circle.excellent {
+  border-color: #00ba7c;
+  background: rgba(0, 186, 124, 0.1);
+}
+
+.tva-score-circle.good {
+  border-color: #1d9bf0;
+  background: rgba(29, 155, 240, 0.1);
+}
+
+.tva-score-circle.fair {
+  border-color: #ffd400;
+  background: rgba(255, 212, 0, 0.1);
+}
+
+.tva-score-circle.poor {
+  border-color: #f4212e;
+  background: rgba(244, 33, 46, 0.1);
+}
+
+.tva-score-number {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.tva-score-label {
+  font-size: 12px;
+  color: #8899a6;
+}
+
+.tva-rating {
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 4px 16px;
+  border-radius: 20px;
+}
+
+.tva-rating.excellent {
+  color: #00ba7c;
+  background: rgba(0, 186, 124, 0.15);
+}
+
+.tva-rating.good {
+  color: #1d9bf0;
+  background: rgba(29, 155, 240, 0.15);
+}
+
+.tva-rating.fair {
+  color: #ffd400;
+  background: rgba(255, 212, 0, 0.15);
+}
+
+.tva-rating.poor {
+  color: #f4212e;
+  background: rgba(244, 33, 46, 0.15);
+}
+
+/* Tweet Preview */
+.tva-preview {
+  padding: 0 20px;
+  margin-bottom: 16px;
+}
+
+.tva-preview-label {
+  font-size: 12px;
+  color: #8899a6;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tva-preview-text {
+  background: #192734;
+  padding: 12px;
+  border-radius: 8px;
+  color: #e7e9ea;
+  font-size: 14px;
+  line-height: 1.4;
+  max-height: 80px;
+  overflow-y: auto;
+  word-wrap: break-word;
+}
+
+/* Section Titles */
+.tva-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #8899a6;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+/* Factors */
+.tva-factors {
+  padding: 0 20px;
+  margin-bottom: 16px;
+}
+
+.tva-factor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.tva-factor.positive {
+  background: rgba(0, 186, 124, 0.1);
+}
+
+.tva-factor.negative {
+  background: rgba(244, 33, 46, 0.1);
+}
+
+.tva-factor-label {
+  color: #e7e9ea;
+}
+
+.tva-factor-impact {
+  font-weight: 600;
+}
+
+.tva-factor.positive .tva-factor-impact {
+  color: #00ba7c;
+}
+
+.tva-factor.negative .tva-factor-impact {
+  color: #f4212e;
+}
+
+/* Warnings */
+.tva-warnings {
+  padding: 0 20px;
+  margin-bottom: 16px;
+}
+
+.tva-warning {
+  background: rgba(244, 33, 46, 0.1);
+  border-left: 3px solid #f4212e;
+  padding: 10px 12px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 8px;
+  color: #e7e9ea;
+  font-size: 13px;
+}
+
+/* Suggestions */
+.tva-suggestions {
+  padding: 0 20px;
+  margin-bottom: 16px;
+}
+
+.tva-suggestion {
+  background: rgba(29, 155, 240, 0.1);
+  border-left: 3px solid #1d9bf0;
+  padding: 10px 12px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 8px;
+  color: #e7e9ea;
+  font-size: 13px;
+}
+
+/* Action Buttons */
+.tva-actions {
+  display: flex;
+  gap: 12px;
+  padding: 20px;
+  border-top: 1px solid #38444d;
+}
+
+.tva-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  border: none;
+}
+
+.tva-btn:active {
+  transform: scale(0.98);
+}
+
+.tva-btn-edit {
+  background: transparent;
+  color: #1d9bf0;
+  border: 1px solid #536471;
+}
+
+.tva-btn-edit:hover {
+  background: rgba(29, 155, 240, 0.1);
+  border-color: #1d9bf0;
+}
+
+.tva-btn-post {
+  background: #1d9bf0;
+  color: #ffffff;
+}
+
+.tva-btn-post:hover {
+  background: #1a8cd8;
+}
+
+/* Scrollbar styling */
+.tva-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tva-modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tva-modal::-webkit-scrollbar-thumb {
+  background: #38444d;
+  border-radius: 4px;
+}
+
+.tva-modal::-webkit-scrollbar-thumb:hover {
+  background: #536471;
+}
+
+/* Light mode support */
+@media (prefers-color-scheme: light) {
+  .tva-modal {
+    background: #ffffff;
+  }
+
+  .tva-header {
+    border-bottom-color: #eff3f4;
+  }
+
+  .tva-header h2 {
+    color: #0f1419;
+  }
+
+  .tva-close {
+    color: #536471;
+  }
+
+  .tva-close:hover {
+    background: rgba(15, 20, 25, 0.1);
+    color: #0f1419;
+  }
+
+  .tva-score-number {
+    color: #0f1419;
+  }
+
+  .tva-preview-text {
+    background: #eff3f4;
+    color: #0f1419;
+  }
+
+  .tva-factor-label {
+    color: #0f1419;
+  }
+
+  .tva-warning,
+  .tva-suggestion {
+    color: #0f1419;
+  }
+
+  .tva-actions {
+    border-top-color: #eff3f4;
+  }
+}
