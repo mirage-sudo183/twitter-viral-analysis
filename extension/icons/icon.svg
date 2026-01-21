@@ -29,14 +29,11 @@
     </filter>
   </defs>
 
-  <!-- Background -->
-  <rect width="128" height="128" rx="28" fill="url(#bgGrad)"/>
-
-  <!-- Subtle border -->
-  <rect width="126" height="126" x="1" y="1" rx="27" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <!-- Background - full square, no rounded corners -->
+  <rect width="128" height="128" fill="url(#bgGrad)"/>
 
   <!-- Ambient glow -->
-  <rect width="128" height="128" rx="28" fill="url(#glowGrad)"/>
+  <rect width="128" height="128" fill="url(#glowGrad)"/>
 
   <!-- Grid pattern (subtle) -->
   <g opacity="0.08">
@@ -50,11 +47,11 @@
 
   <!-- Lightning bolt -->
   <g filter="url(#glow)">
-    <path d="M72 20 L52 58 L66 58 L56 108 L86 54 L70 54 L84 20 Z"
+    <path d="M72 16 L48 60 L64 60 L52 112 L88 52 L70 52 L86 16 Z"
           fill="url(#boltGrad)"/>
   </g>
 
   <!-- Small accent circle -->
-  <circle cx="98" cy="98" r="8" fill="#10b981" opacity="0.8"/>
-  <circle cx="98" cy="98" r="4" fill="#34d399"/>
+  <circle cx="100" cy="100" r="10" fill="#10b981" opacity="0.6"/>
+  <circle cx="100" cy="100" r="5" fill="#34d399"/>
 </svg>
