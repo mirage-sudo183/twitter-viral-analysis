@@ -4,7 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tweet Viral Analyzer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #fdfbf7;
+      --fg: #2d2d2d;
+      --muted: #e5e0d8;
+      --accent: #ff4d4d;
+      --blue: #2d5da1;
+      --postit: #fff9c4;
+      --white: #ffffff;
+      --radius-wobbly: 255px 15px 225px 15px / 15px 225px 15px 255px;
+      --radius-wobbly-sm: 95px 10px 85px 10px / 10px 85px 10px 95px;
+      --shadow: 4px 4px 0px 0px var(--fg);
+      --shadow-sm: 2px 2px 0px 0px var(--fg);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -12,31 +27,57 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Patrick Hand', cursive;
       width: 320px;
-      background: #15202b;
-      color: #e7e9ea;
+      background: var(--bg);
+      color: var(--fg);
+      background-image: radial-gradient(var(--muted) 1px, transparent 1px);
+      background-size: 20px 20px;
     }
 
     .header {
-      padding: 20px;
-      border-bottom: 1px solid #38444d;
+      padding: 24px 20px 20px;
+      border-bottom: 3px dashed var(--muted);
       text-align: center;
+      position: relative;
+    }
+
+    /* Tape decoration */
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%) rotate(2deg);
+      width: 60px;
+      height: 18px;
+      background: rgba(200, 200, 200, 0.6);
+      border-radius: 2px;
     }
 
     .logo {
-      font-size: 24px;
-      margin-bottom: 4px;
+      font-size: 32px;
+      margin-bottom: 8px;
+      display: inline-block;
+      animation: bounce 3s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-4px) rotate(2deg); }
     }
 
     h1 {
-      font-size: 16px;
+      font-size: 20px;
       font-weight: 700;
+      font-family: 'Kalam', cursive;
+      transform: rotate(-1deg);
     }
 
     .subtitle {
-      font-size: 12px;
-      color: #8899a6;
+      font-size: 14px;
+      color: var(--fg);
+      opacity: 0.7;
       margin-top: 4px;
     }
 
@@ -44,16 +85,56 @@
       padding: 20px;
     }
 
+    .status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px;
+      background: var(--white);
+      border: 2px solid var(--fg);
+      border-radius: var(--radius-wobbly-sm);
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      transform: rotate(0.5deg);
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      background: #00ba7c;
+      border-radius: 50%;
+      border: 2px solid var(--fg);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .status-text {
+      font-size: 15px;
+      color: #00ba7c;
+      font-family: 'Kalam', cursive;
+      font-weight: 700;
+    }
+
     .setting {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid #38444d;
+      padding: 14px 16px;
+      background: var(--white);
+      border: 2px solid var(--fg);
+      border-radius: var(--radius-wobbly-sm);
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.1s ease;
     }
 
-    .setting:last-child {
-      border-bottom: none;
+    .setting:hover {
+      transform: rotate(0.5deg);
     }
 
     .setting-info {
@@ -61,21 +142,22 @@
     }
 
     .setting-label {
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Kalam', cursive;
     }
 
     .setting-desc {
-      font-size: 12px;
-      color: #8899a6;
+      font-size: 13px;
+      opacity: 0.7;
       margin-top: 2px;
     }
 
-    /* Toggle Switch */
+    /* Toggle Switch - Hand-drawn style */
     .toggle {
       position: relative;
-      width: 44px;
-      height: 24px;
+      width: 52px;
+      height: 28px;
       margin-left: 12px;
     }
 
@@ -92,50 +174,93 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: #38444d;
-      transition: 0.3s;
-      border-radius: 24px;
+      background-color: var(--muted);
+      transition: 0.2s;
+      border-radius: 30px 25px 28px 26px / 26px 28px 25px 30px;
+      border: 2px solid var(--fg);
     }
 
     .toggle-slider:before {
       position: absolute;
       content: "";
-      height: 18px;
-      width: 18px;
+      height: 20px;
+      width: 20px;
       left: 3px;
-      bottom: 3px;
-      background-color: #e7e9ea;
-      transition: 0.3s;
+      bottom: 2px;
+      background-color: var(--white);
+      transition: 0.2s;
       border-radius: 50%;
+      border: 2px solid var(--fg);
+      box-shadow: 1px 1px 0px var(--fg);
     }
 
     .toggle input:checked + .toggle-slider {
-      background-color: #1d9bf0;
+      background-color: var(--accent);
     }
 
     .toggle input:checked + .toggle-slider:before {
-      transform: translateX(20px);
+      transform: translateX(24px);
+      background-color: var(--white);
     }
 
     .stats {
-      background: #192734;
-      border-radius: 12px;
-      padding: 16px;
-      margin-top: 16px;
+      background: var(--postit);
+      border: 2px solid var(--fg);
+      border-radius: var(--radius-wobbly-sm);
+      padding: 18px;
+      margin-top: 20px;
+      box-shadow: var(--shadow);
+      transform: rotate(-0.5deg);
+      position: relative;
+    }
+
+    /* Thumbtack */
+    .stats::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 2px solid var(--fg);
+      box-shadow: 1px 1px 0px var(--fg);
     }
 
     .stats-title {
-      font-size: 12px;
-      color: #8899a6;
+      font-size: 14px;
+      font-family: 'Kalam', cursive;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .stats-title::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--fg) 0px,
+        var(--fg) 4px,
+        transparent 4px,
+        transparent 8px
+      );
     }
 
     .stat-row {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      padding: 6px 0;
     }
 
     .stat-row:last-child {
@@ -143,59 +268,54 @@
     }
 
     .stat-label {
-      font-size: 13px;
-      color: #8899a6;
+      font-size: 14px;
+      opacity: 0.8;
     }
 
     .stat-value {
-      font-size: 13px;
-      font-weight: 600;
-      color: #1d9bf0;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Kalam', cursive;
+      color: var(--blue);
     }
 
     .footer {
-      padding: 16px 20px;
-      border-top: 1px solid #38444d;
+      padding: 18px 20px;
+      border-top: 3px dashed var(--muted);
       text-align: center;
     }
 
     .footer a {
-      color: #1d9bf0;
+      color: var(--blue);
       text-decoration: none;
-      font-size: 12px;
+      font-size: 14px;
+      font-family: 'Kalam', cursive;
+      font-weight: 700;
+      padding: 8px 16px;
+      border: 2px solid var(--fg);
+      border-radius: var(--radius-wobbly-sm);
+      display: inline-block;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.1s ease;
     }
 
     .footer a:hover {
-      text-decoration: underline;
+      background: var(--blue);
+      color: var(--white);
+      transform: translate(2px, 2px);
+      box-shadow: none;
     }
 
-    .status {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px;
-      background: rgba(0, 186, 124, 0.1);
-      border-radius: 8px;
-      margin-bottom: 16px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: #00ba7c;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    .status-text {
-      font-size: 13px;
-      color: #00ba7c;
+    /* Decorative pencil */
+    .content::after {
+      content: '✎';
+      position: fixed;
+      bottom: 70px;
+      right: 5px;
+      font-size: 24px;
+      opacity: 0.2;
+      transform: rotate(45deg);
     }
   </style>
 </head>
@@ -203,7 +323,7 @@
   <div class="header">
     <div class="logo">📊</div>
     <h1>Tweet Viral Analyzer</h1>
-    <p class="subtitle">Optimize your tweets before posting</p>
+    <p class="subtitle">Optimize your tweets before posting!</p>
   </div>
 
   <div class="content">
