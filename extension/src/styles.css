@@ -1,50 +1,18 @@
-/* Tweet Viral Analyzer - Hand-Drawn Design System */
+/* Tweet Viral Analyzer - Modal Styles */
 
-@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&display=swap');
-
-/* CSS Variables */
-:root {
-  --tva-bg: #fdfbf7;
-  --tva-fg: #2d2d2d;
-  --tva-muted: #e5e0d8;
-  --tva-accent: #ff4d4d;
-  --tva-border: #2d2d2d;
-  --tva-blue: #2d5da1;
-  --tva-postit: #fff9c4;
-  --tva-white: #ffffff;
-
-  --tva-font-heading: 'Kalam', cursive;
-  --tva-font-body: 'Patrick Hand', cursive;
-
-  --tva-radius-wobbly: 255px 15px 225px 15px / 15px 225px 15px 255px;
-  --tva-radius-wobbly-md: 15px 255px 15px 225px / 225px 15px 255px 15px;
-  --tva-radius-wobbly-sm: 95px 10px 85px 10px / 10px 85px 10px 95px;
-
-  --tva-shadow: 4px 4px 0px 0px var(--tva-fg);
-  --tva-shadow-hover: 2px 2px 0px 0px var(--tva-fg);
-  --tva-shadow-lg: 8px 8px 0px 0px var(--tva-fg);
-}
-
-/* Modal Overlay */
 .tva-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(45, 45, 45, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999999;
-  font-family: var(--tva-font-body);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   animation: tva-fadeIn 0.2s ease-out;
-
-  /* Paper texture */
-  background-image:
-    radial-gradient(rgba(45, 45, 45, 0.3) 1px, transparent 1px),
-    linear-gradient(rgba(45, 45, 45, 0.4) 0%, rgba(45, 45, 45, 0.4) 100%);
-  background-size: 24px 24px, 100% 100%;
 }
 
 @keyframes tva-fadeIn {
@@ -55,50 +23,23 @@
 @keyframes tva-slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px) rotate(-1deg);
+    transform: translateY(20px) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateY(0) rotate(0.5deg);
+    transform: translateY(0) scale(1);
   }
 }
 
-@keyframes tva-bounce {
-  0%, 100% { transform: translateY(0) rotate(2deg); }
-  50% { transform: translateY(-6px) rotate(-1deg); }
-}
-
-/* Modal Container */
 .tva-modal {
-  background: var(--tva-bg);
-  border: 3px solid var(--tva-border);
-  border-radius: var(--tva-radius-wobbly-md);
+  background: #15202b;
+  border-radius: 16px;
   width: 90%;
   max-width: 480px;
   max-height: 85vh;
   overflow-y: auto;
-  box-shadow: var(--tva-shadow-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   animation: tva-slideUp 0.3s ease-out;
-  transform: rotate(0.5deg);
-  position: relative;
-
-  /* Paper texture inside */
-  background-image: radial-gradient(var(--tva-muted) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
-/* Tape decoration at top */
-.tva-modal::before {
-  content: '';
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-2deg);
-  width: 80px;
-  height: 24px;
-  background: rgba(200, 200, 200, 0.6);
-  border-radius: 2px;
-  z-index: 10;
 }
 
 /* Header */
@@ -106,38 +47,31 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 24px 16px;
-  border-bottom: 3px dashed var(--tva-muted);
+  padding: 16px 20px;
+  border-bottom: 1px solid #38444d;
 }
 
 .tva-header h2 {
   margin: 0;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 700;
-  color: var(--tva-fg);
-  font-family: var(--tva-font-heading);
-  transform: rotate(-1deg);
+  color: #ffffff;
 }
 
 .tva-close {
-  background: var(--tva-white);
-  border: 2px solid var(--tva-border);
-  color: var(--tva-fg);
-  font-size: 20px;
+  background: none;
+  border: none;
+  color: #8899a6;
+  font-size: 24px;
   cursor: pointer;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--tva-radius-wobbly-sm);
-  box-shadow: var(--tva-shadow-hover);
-  transition: all 0.1s ease;
-  font-family: var(--tva-font-body);
+  padding: 4px 8px;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
 }
 
 .tva-close:hover {
-  background: var(--tva-accent);
-  color: var(--tva-white);
-  transform: translate(2px, 2px) rotate(5deg);
-  box-shadow: none;
+  background: rgba(239, 243, 244, 0.1);
+  color: #ffffff;
 }
 
 /* Score Section */
@@ -146,227 +80,145 @@
   flex-direction: column;
   align-items: center;
   padding: 24px;
-  position: relative;
 }
 
 .tva-score-circle {
-  width: 120px;
-  height: 120px;
-  border: 4px solid var(--tva-border);
-  border-radius: 95px 85px 90px 80px / 80px 90px 85px 95px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--tva-white);
-  box-shadow: var(--tva-shadow);
-  transform: rotate(-2deg);
-  position: relative;
-}
-
-/* Decorative scribble around score */
-.tva-score-circle::after {
-  content: '~';
-  position: absolute;
-  top: -15px;
-  right: -10px;
-  font-size: 28px;
-  color: var(--tva-accent);
-  font-family: var(--tva-font-heading);
-  animation: tva-bounce 3s ease-in-out infinite;
+  border: 4px solid;
 }
 
 .tva-score-circle.excellent {
   border-color: #00ba7c;
-}
-
-.tva-score-circle.excellent::after {
-  content: '★';
-  color: #00ba7c;
+  background: rgba(0, 186, 124, 0.1);
 }
 
 .tva-score-circle.good {
-  border-color: var(--tva-blue);
-}
-
-.tva-score-circle.good::after {
-  content: '✓';
-  color: var(--tva-blue);
+  border-color: #1d9bf0;
+  background: rgba(29, 155, 240, 0.1);
 }
 
 .tva-score-circle.fair {
-  border-color: #e6a700;
-}
-
-.tva-score-circle.fair::after {
-  content: '~';
-  color: #e6a700;
+  border-color: #ffd400;
+  background: rgba(255, 212, 0, 0.1);
 }
 
 .tva-score-circle.poor {
-  border-color: var(--tva-accent);
-}
-
-.tva-score-circle.poor::after {
-  content: '!';
-  color: var(--tva-accent);
+  border-color: #f4212e;
+  background: rgba(244, 33, 46, 0.1);
 }
 
 .tva-score-number {
-  font-size: 42px;
+  font-size: 32px;
   font-weight: 700;
-  color: var(--tva-fg);
+  color: #ffffff;
   line-height: 1;
-  font-family: var(--tva-font-heading);
 }
 
 .tva-score-label {
-  font-size: 14px;
-  color: var(--tva-fg);
-  opacity: 0.6;
-  font-family: var(--tva-font-body);
+  font-size: 12px;
+  color: #8899a6;
 }
 
 .tva-rating {
-  margin-top: 16px;
-  font-size: 18px;
-  font-weight: 700;
-  padding: 6px 20px;
-  border: 2px solid var(--tva-border);
-  border-radius: var(--tva-radius-wobbly-sm);
-  background: var(--tva-white);
-  box-shadow: var(--tva-shadow-hover);
-  font-family: var(--tva-font-heading);
-  transform: rotate(1deg);
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 4px 16px;
+  border-radius: 20px;
 }
 
 .tva-rating.excellent {
-  background: #00ba7c;
-  color: var(--tva-white);
-  border-color: #00ba7c;
+  color: #00ba7c;
+  background: rgba(0, 186, 124, 0.15);
 }
 
 .tva-rating.good {
-  background: var(--tva-blue);
-  color: var(--tva-white);
-  border-color: var(--tva-blue);
+  color: #1d9bf0;
+  background: rgba(29, 155, 240, 0.15);
 }
 
 .tva-rating.fair {
-  background: var(--tva-postit);
-  color: var(--tva-fg);
-  border-color: #e6a700;
+  color: #ffd400;
+  background: rgba(255, 212, 0, 0.15);
 }
 
 .tva-rating.poor {
-  background: var(--tva-accent);
-  color: var(--tva-white);
-  border-color: var(--tva-accent);
+  color: #f4212e;
+  background: rgba(244, 33, 46, 0.15);
 }
 
 /* Tweet Preview */
 .tva-preview {
-  padding: 0 24px;
-  margin-bottom: 20px;
+  padding: 0 20px;
+  margin-bottom: 16px;
 }
 
 .tva-preview-label {
   font-size: 12px;
-  color: var(--tva-fg);
+  color: #8899a6;
   margin-bottom: 8px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  font-family: var(--tva-font-heading);
-  transform: rotate(-0.5deg);
-  display: inline-block;
+  letter-spacing: 0.5px;
 }
 
 .tva-preview-text {
-  background: var(--tva-white);
-  padding: 16px;
-  border: 2px solid var(--tva-border);
-  border-radius: var(--tva-radius-wobbly-sm);
-  color: var(--tva-fg);
-  font-size: 16px;
-  line-height: 1.5;
-  max-height: 100px;
+  background: #192734;
+  padding: 12px;
+  border-radius: 8px;
+  color: #e7e9ea;
+  font-size: 14px;
+  line-height: 1.4;
+  max-height: 80px;
   overflow-y: auto;
   word-wrap: break-word;
-  box-shadow: 3px 3px 0px 0px rgba(45, 45, 45, 0.1);
-  font-family: var(--tva-font-body);
 }
 
 /* Section Titles */
 .tva-section-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--tva-fg);
+  font-size: 13px;
+  font-weight: 600;
+  color: #8899a6;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
-  font-family: var(--tva-font-heading);
-  position: relative;
-  display: inline-block;
-  transform: rotate(-0.5deg);
-}
-
-/* Wavy underline for section titles */
-.tva-section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--tva-fg) 0px,
-    var(--tva-fg) 4px,
-    transparent 4px,
-    transparent 8px
-  );
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
 }
 
 /* Factors */
 .tva-factors {
-  padding: 0 24px;
-  margin-bottom: 20px;
+  padding: 0 20px;
+  margin-bottom: 16px;
 }
 
 .tva-factor {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 14px;
-  border: 2px solid var(--tva-border);
-  border-radius: var(--tva-radius-wobbly-sm);
-  margin-bottom: 8px;
-  font-size: 14px;
-  background: var(--tva-white);
-  box-shadow: 2px 2px 0px 0px rgba(45, 45, 45, 0.1);
-  transition: transform 0.1s ease;
-}
-
-.tva-factor:hover {
-  transform: rotate(0.5deg);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 13px;
 }
 
 .tva-factor.positive {
-  border-left: 4px solid #00ba7c;
+  background: rgba(0, 186, 124, 0.1);
 }
 
 .tva-factor.negative {
-  border-left: 4px solid var(--tva-accent);
+  background: rgba(244, 33, 46, 0.1);
 }
 
 .tva-factor-label {
-  color: var(--tva-fg);
-  font-family: var(--tva-font-body);
+  color: #e7e9ea;
 }
 
 .tva-factor-impact {
-  font-weight: 700;
-  font-family: var(--tva-font-heading);
+  font-weight: 600;
 }
 
 .tva-factor.positive .tva-factor-impact {
@@ -374,161 +226,144 @@
 }
 
 .tva-factor.negative .tva-factor-impact {
-  color: var(--tva-accent);
+  color: #f4212e;
 }
 
 /* Warnings */
 .tva-warnings {
-  padding: 0 24px;
-  margin-bottom: 20px;
+  padding: 0 20px;
+  margin-bottom: 16px;
 }
 
 .tva-warning {
-  background: var(--tva-white);
-  border: 2px solid var(--tva-accent);
-  border-left: 5px solid var(--tva-accent);
-  padding: 12px 14px;
-  border-radius: var(--tva-radius-wobbly-sm);
-  margin-bottom: 10px;
-  color: var(--tva-fg);
-  font-size: 14px;
-  box-shadow: 3px 3px 0px 0px rgba(255, 77, 77, 0.2);
-  font-family: var(--tva-font-body);
-  position: relative;
-  transform: rotate(-0.3deg);
-}
-
-/* Exclamation mark decoration */
-.tva-warning::before {
-  content: '!';
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  width: 24px;
-  height: 24px;
-  background: var(--tva-accent);
-  color: var(--tva-white);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--tva-font-heading);
-  font-weight: 700;
-  font-size: 14px;
-  border: 2px solid var(--tva-border);
+  background: rgba(244, 33, 46, 0.1);
+  border-left: 3px solid #f4212e;
+  padding: 10px 12px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 8px;
+  color: #e7e9ea;
+  font-size: 13px;
 }
 
 /* Suggestions */
 .tva-suggestions {
-  padding: 0 24px;
-  margin-bottom: 20px;
+  padding: 0 20px;
+  margin-bottom: 16px;
 }
 
 .tva-suggestion {
-  background: var(--tva-postit);
-  border: 2px solid var(--tva-border);
-  padding: 12px 14px;
-  border-radius: var(--tva-radius-wobbly-sm);
-  margin-bottom: 10px;
-  color: var(--tva-fg);
-  font-size: 14px;
-  box-shadow: var(--tva-shadow-hover);
-  font-family: var(--tva-font-body);
-  transform: rotate(0.5deg);
-  position: relative;
-}
-
-/* Thumbtack on suggestions */
-.tva-suggestion::before {
-  content: '';
-  position: absolute;
-  top: -6px;
-  right: 20px;
-  width: 12px;
-  height: 12px;
-  background: var(--tva-accent);
-  border-radius: 50%;
-  border: 2px solid var(--tva-border);
-  box-shadow: 1px 1px 0px var(--tva-fg);
+  background: rgba(29, 155, 240, 0.1);
+  border-left: 3px solid #1d9bf0;
+  padding: 10px 12px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 8px;
+  color: #e7e9ea;
+  font-size: 13px;
 }
 
 /* Action Buttons */
 .tva-actions {
   display: flex;
-  gap: 16px;
-  padding: 24px;
-  border-top: 3px dashed var(--tva-muted);
+  gap: 12px;
+  padding: 20px;
+  border-top: 1px solid #38444d;
 }
 
 .tva-btn {
   flex: 1;
-  padding: 14px 24px;
-  border-radius: var(--tva-radius-wobbly);
-  font-size: 18px;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  font-size: 15px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.1s ease;
-  border: 3px solid var(--tva-border);
-  font-family: var(--tva-font-heading);
+  transition: background 0.2s, transform 0.1s;
+  border: none;
 }
 
 .tva-btn:active {
-  transform: translate(4px, 4px);
-  box-shadow: none !important;
+  transform: scale(0.98);
 }
 
 .tva-btn-edit {
-  background: var(--tva-white);
-  color: var(--tva-fg);
-  box-shadow: var(--tva-shadow);
+  background: transparent;
+  color: #1d9bf0;
+  border: 1px solid #536471;
 }
 
 .tva-btn-edit:hover {
-  background: var(--tva-muted);
-  transform: translate(2px, 2px);
-  box-shadow: var(--tva-shadow-hover);
+  background: rgba(29, 155, 240, 0.1);
+  border-color: #1d9bf0;
 }
 
 .tva-btn-post {
-  background: var(--tva-accent);
-  color: var(--tva-white);
-  border-color: var(--tva-border);
-  box-shadow: var(--tva-shadow);
+  background: #1d9bf0;
+  color: #ffffff;
 }
 
 .tva-btn-post:hover {
-  background: #e64444;
-  transform: translate(2px, 2px) rotate(1deg);
-  box-shadow: var(--tva-shadow-hover);
+  background: #1a8cd8;
 }
 
 /* Scrollbar styling */
 .tva-modal::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 .tva-modal::-webkit-scrollbar-track {
-  background: var(--tva-muted);
-  border-radius: 5px;
+  background: transparent;
 }
 
 .tva-modal::-webkit-scrollbar-thumb {
-  background: var(--tva-fg);
-  border-radius: 5px;
-  border: 2px solid var(--tva-muted);
+  background: #38444d;
+  border-radius: 4px;
 }
 
 .tva-modal::-webkit-scrollbar-thumb:hover {
-  background: var(--tva-blue);
+  background: #536471;
 }
 
-/* Decorative elements */
-.tva-modal::after {
-  content: '✎';
-  position: absolute;
-  bottom: 80px;
-  right: -15px;
-  font-size: 32px;
-  transform: rotate(45deg);
-  opacity: 0.3;
+/* Light mode support */
+@media (prefers-color-scheme: light) {
+  .tva-modal {
+    background: #ffffff;
+  }
+
+  .tva-header {
+    border-bottom-color: #eff3f4;
+  }
+
+  .tva-header h2 {
+    color: #0f1419;
+  }
+
+  .tva-close {
+    color: #536471;
+  }
+
+  .tva-close:hover {
+    background: rgba(15, 20, 25, 0.1);
+    color: #0f1419;
+  }
+
+  .tva-score-number {
+    color: #0f1419;
+  }
+
+  .tva-preview-text {
+    background: #eff3f4;
+    color: #0f1419;
+  }
+
+  .tva-factor-label {
+    color: #0f1419;
+  }
+
+  .tva-warning,
+  .tva-suggestion {
+    color: #0f1419;
+  }
+
+  .tva-actions {
+    border-top-color: #eff3f4;
+  }
 }
