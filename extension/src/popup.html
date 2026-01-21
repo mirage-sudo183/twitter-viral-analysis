@@ -4,7 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tweet Viral Analyzer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --void: #050505;
+      --surface: #0a0a0a;
+      --white: #ffffff;
+      --white-80: rgba(255, 255, 255, 0.8);
+      --white-60: rgba(255, 255, 255, 0.6);
+      --white-40: rgba(255, 255, 255, 0.4);
+      --white-20: rgba(255, 255, 255, 0.2);
+      --white-10: rgba(255, 255, 255, 0.1);
+      --white-05: rgba(255, 255, 255, 0.05);
+      --emerald: #10b981;
+      --emerald-light: #34d399;
+      --emerald-glow: rgba(16, 185, 129, 0.4);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -12,48 +28,127 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       width: 320px;
-      background: #15202b;
-      color: #e7e9ea;
+      background: var(--void);
+      color: var(--white);
+      position: relative;
+    }
+
+    /* Subtle grid overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(to right, var(--white-05) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--white-05) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+      opacity: 0.3;
+      mask-image: radial-gradient(ellipse 100% 60% at 50% 0%, black 10%, transparent 60%);
     }
 
     .header {
-      padding: 20px;
-      border-bottom: 1px solid #38444d;
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid var(--white-10);
       text-align: center;
+      position: relative;
+    }
+
+    /* Ambient glow */
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 100px;
+      background: radial-gradient(ellipse, var(--emerald-glow) 0%, transparent 70%);
+      pointer-events: none;
+      opacity: 0.3;
     }
 
     .logo {
-      font-size: 24px;
-      margin-bottom: 4px;
+      font-size: 28px;
+      margin-bottom: 8px;
+      display: block;
+      position: relative;
+      z-index: 1;
     }
 
     h1 {
-      font-size: 16px;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 500;
+      font-family: 'Newsreader', Georgia, serif;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
     }
 
     .subtitle {
       font-size: 12px;
-      color: #8899a6;
-      margin-top: 4px;
+      color: var(--white-40);
+      margin-top: 6px;
+      font-weight: 400;
+      position: relative;
+      z-index: 1;
     }
 
     .content {
       padding: 20px;
     }
 
+    .status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--emerald);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--emerald-glow);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--emerald-glow); }
+      50% { opacity: 0.6; box-shadow: 0 0 20px var(--emerald-glow); }
+    }
+
+    .status-text {
+      font-size: 12px;
+      color: var(--emerald-light);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
     .setting {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid #38444d;
+      padding: 16px;
+      background: var(--white-05);
+      border: 1px solid var(--white-10);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
     }
 
-    .setting:last-child {
-      border-bottom: none;
+    .setting:hover {
+      background: var(--white-10);
+      border-color: var(--emerald);
     }
 
     .setting-info {
@@ -63,12 +158,13 @@
     .setting-label {
       font-size: 14px;
       font-weight: 500;
+      color: var(--white-80);
     }
 
     .setting-desc {
-      font-size: 12px;
-      color: #8899a6;
-      margin-top: 2px;
+      font-size: 11px;
+      color: var(--white-40);
+      margin-top: 3px;
     }
 
     /* Toggle Switch */
@@ -92,7 +188,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: #38444d;
+      background-color: var(--white-10);
+      border: 1px solid var(--white-20);
       transition: 0.3s;
       border-radius: 24px;
     }
@@ -102,106 +199,120 @@
       content: "";
       height: 18px;
       width: 18px;
-      left: 3px;
-      bottom: 3px;
-      background-color: #e7e9ea;
+      left: 2px;
+      bottom: 2px;
+      background-color: var(--white-60);
       transition: 0.3s;
       border-radius: 50%;
     }
 
     .toggle input:checked + .toggle-slider {
-      background-color: #1d9bf0;
+      background-color: var(--emerald);
+      border-color: var(--emerald);
+      box-shadow: 0 0 15px var(--emerald-glow);
     }
 
     .toggle input:checked + .toggle-slider:before {
       transform: translateX(20px);
+      background-color: var(--white);
     }
 
     .stats {
-      background: #192734;
+      background: var(--surface);
+      border: 1px solid var(--white-10);
       border-radius: 12px;
-      padding: 16px;
-      margin-top: 16px;
+      padding: 20px;
+      margin-top: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle gradient accent */
+    .stats::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--emerald), transparent);
+      opacity: 0.5;
     }
 
     .stats-title {
-      font-size: 12px;
-      color: #8899a6;
+      font-size: 10px;
+      color: var(--emerald);
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
+      letter-spacing: 0.2em;
+      margin-bottom: 16px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stats-title::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      background: var(--emerald);
+      border-radius: 50%;
     }
 
     .stat-row {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 8px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--white-05);
     }
 
     .stat-row:last-child {
-      margin-bottom: 0;
+      border-bottom: none;
+      padding-bottom: 0;
     }
 
     .stat-label {
       font-size: 13px;
-      color: #8899a6;
+      color: var(--white-40);
     }
 
     .stat-value {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
-      color: #1d9bf0;
+      color: var(--white);
+      font-family: 'Newsreader', Georgia, serif;
     }
 
     .footer {
-      padding: 16px 20px;
-      border-top: 1px solid #38444d;
+      padding: 20px;
+      border-top: 1px solid var(--white-10);
       text-align: center;
     }
 
     .footer a {
-      color: #1d9bf0;
+      color: var(--white-60);
       text-decoration: none;
       font-size: 12px;
+      padding: 10px 20px;
+      border: 1px solid var(--white-20);
+      border-radius: 100px;
+      display: inline-block;
+      transition: all 0.3s ease;
+      font-weight: 500;
     }
 
     .footer a:hover {
-      text-decoration: underline;
-    }
-
-    .status {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px;
-      background: rgba(0, 186, 124, 0.1);
-      border-radius: 8px;
-      margin-bottom: 16px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: #00ba7c;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    .status-text {
-      font-size: 13px;
-      color: #00ba7c;
+      background: var(--white);
+      color: var(--void);
+      border-color: var(--white);
+      box-shadow: 0 0 20px var(--emerald-glow);
     }
   </style>
 </head>
 <body>
   <div class="header">
-    <div class="logo">📊</div>
+    <span class="logo">⚡</span>
     <h1>Tweet Viral Analyzer</h1>
     <p class="subtitle">Optimize your tweets before posting</p>
   </div>
